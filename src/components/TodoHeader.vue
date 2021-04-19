@@ -6,7 +6,6 @@
 </template>
 
 <script>
-console.log(this.$store);
 export default {};
 </script>
 

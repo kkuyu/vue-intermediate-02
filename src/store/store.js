@@ -38,6 +38,22 @@ export const store = new Vuex.Store({
       };
       localStorage.setItem("todo_" + obj.timestamp, JSON.stringify(obj));
       state.todoItems.push(obj);
+    },
+    removeOneItem(state, { todoItem, index }) {
+      localStorage.removeItem("todo_" + todoItem.timestamp);
+      state.todoItems.splice(index, 1);
+    },
+    toggleOneItem(state, { todoItem, index }) {
+      state.todoItems[index].completed = !state.todoItems[index].completed;
+      localStorage.removeItem("todo_" + todoItem.timestamp);
+      localStorage.setItem(
+        "todo_" + todoItem.timestamp,
+        JSON.stringify(todoItem)
+      );
+    },
+    clearAllItem(state) {
+      localStorage.clear();
+      state.todoItems = [];
     }
   }
 });
