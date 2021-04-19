@@ -23,5 +23,21 @@ export const store = new Vuex.Store({
   state: {
     headerText: "TODO it!",
     todoItems: storage.fetch()
+  },
+  mutations: {
+    addOneItem(state, todoItem) {
+      const date = new Date();
+      const dateStr = `Date:
+          ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}
+          ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+      const obj = {
+        time: dateStr,
+        timestamp: date.getTime(),
+        completed: false,
+        item: todoItem
+      };
+      localStorage.setItem("todo_" + obj.timestamp, JSON.stringify(obj));
+      state.todoItems.push(obj);
+    }
   }
 });

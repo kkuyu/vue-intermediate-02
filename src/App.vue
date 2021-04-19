@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <TodoHeader />
-    <TodoInput v-on:addTodoItem="addOneItem" />
+    <TodoInput />
     <TodoList
       v-bind:propsdata="todoItems"
       v-on:removeTodoItem="removeOneItem"
@@ -22,17 +22,6 @@ export default {
     return { todoItems: [] };
   },
   methods: {
-    addOneItem(todoItem) {
-      const date = new Date();
-      const obj = {
-        time: this.getDateStr(date),
-        timestamp: date.getTime(),
-        completed: false,
-        item: todoItem
-      };
-      localStorage.setItem("todo_" + obj.timestamp, JSON.stringify(obj));
-      this.todoItems.push(obj);
-    },
     removeOneItem(todoItem, index) {
       localStorage.removeItem("todo_" + todoItem.timestamp);
       this.todoItems.splice(index, 1);
@@ -48,11 +37,6 @@ export default {
     clearAllItem() {
       localStorage.clear();
       this.todoItems = [];
-    },
-    getDateStr(date) {
-      return `Date:
-        ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}
-				${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
     }
   },
   components: {
