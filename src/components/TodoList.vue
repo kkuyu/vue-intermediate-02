@@ -2,7 +2,7 @@
   <div>
     <transition-group name="list" tag="ul">
       <li
-        v-for="(todoItem, index) in this.storedTodoItems"
+        v-for="(todoItem, index) in this.todoItems"
         v-bind:key="todoItem.timestamp"
         class="shadow"
       >
@@ -42,7 +42,10 @@ export default {
     // todoItems() {
     //   return this.$store.getters.storedTodoItems;
     // },
-    ...mapGetters(["storedTodoItems"])
+    // ...mapGetters(["storedTodoItems"])
+    ...mapGetters({
+      todoItems: "storedTodoItems"
+    })
   }
 };
 </script>
