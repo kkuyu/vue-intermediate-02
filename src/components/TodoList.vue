@@ -2,7 +2,7 @@
   <div>
     <transition-group name="list" tag="ul">
       <li
-        v-for="(todoItem, index) in this.todoItems"
+        v-for="(todoItem, index) in this.storedTodoItems"
         v-bind:key="todoItem.timestamp"
         class="shadow"
       >
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   methods: {
     removeTodo(todoItem, index) {
@@ -37,9 +39,10 @@ export default {
     }
   },
   computed: {
-    todoItems() {
-      return this.$store.getters.storedTodoItems;
-    }
+    // todoItems() {
+    //   return this.$store.getters.storedTodoItems;
+    // },
+    ...mapGetters(["storedTodoItems"])
   }
 };
 </script>
